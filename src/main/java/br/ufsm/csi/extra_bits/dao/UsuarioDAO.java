@@ -51,4 +51,39 @@ public class UsuarioDAO {
         return user;
     }
 
+    public String cadastroUser(Usuario user){
+
+        try (Connection connection = new ConexaoBD().getConexao()){
+
+            connection.setAutoCommit(false);
+
+            this.sql ="insert into usuario (nome, email, cpf, senha, telefone, data_nascimento, data_cadastro) " +
+                    "values (?, ?, ?, ?, ?, ?, CURRENT_DATE);";
+
+            this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
+            this.preparedStatement.setString(1, user.getNome());
+            this.preparedStatement.setString(2, user.getEmail());
+            this.preparedStatement.setString(3, user.getCpf());
+            this.preparedStatement.setString(4, user.getSenha());
+            this.preparedStatement.setString(5, user.getTelefone());
+            this.preparedStatement.setDate(6, user.getData_nascimento());
+
+            this.preparedStatement.execute();
+            this.resultSet = this.preparedStatement.getGeneratedKeys();
+            this.resultSet.next();
+
+            if(this.resultSet.getInt(1) > 0){
+                this.status = "OK";
+                connection.commit();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            this.status = "ERROR";
+        }
+        return this.status;
+    }
+
+
+
+
 }

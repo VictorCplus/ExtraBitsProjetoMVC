@@ -28,3 +28,6 @@ create table carrinho (
 	foreign key (id_produto) references produto (id_produto) on delete cascade
 );
 
+
+insert into usuario (nome, email, cpf, senha, telefone, data_nascimento, data_cadastro) 
+values ('admin admin', 'admin@admin.com', '00000000000', '1234','5599999999', '10/10/1000', CURRENT_DATE);

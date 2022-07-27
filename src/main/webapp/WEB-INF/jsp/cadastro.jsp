@@ -44,12 +44,12 @@
 <header class="p-3 bg-dark text-white">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="controlador?opcao=voltar" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="controlador?opcao=voltar" class="nav-link px-2 text-secondary"><img src="https://www.pngitem.com/pimgs/m/463-4634301_hardware-logo-on-black-background-hd-png-download.png" alt="" width="50" height="50" class="d-inline-block align-text-center"> ToolsWare</a></li>
+                <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://www.pngitem.com/pimgs/m/463-4634301_hardware-logo-on-black-background-hd-png-download.png" alt="" width="50" height="50" class="d-inline-block align-text-center"> ToolsWare</a></li>
             </ul>
         </div>
     </div>
@@ -70,7 +70,7 @@
     }
 </script>
 
-<section class="vh-100 bg-image"
+<section class="vh-100% bg-image"
          style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">
@@ -80,21 +80,36 @@
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Cadastrar uma conta</h2>
 
-                            <form action="cadastro_usuario" method="post" id="formularioCadastro">
+                            <form action="/extrabits/cadastro" method="post" id="formularioCadastro">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="nomecadastro" required/>
-                                    <label class="form-label" for="form3Example1cg">Seu Nome</label>
+                                    <input type="text" id="nome" class="form-control form-control-lg" name="nomecadastro" required/>
+                                    <label class="form-label" for="nome">Seu Nome Completo</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="emailcadastro" required/>
-                                    <label class="form-label" for="form3Example3cg">Seu Email</label>
+                                    <input type="email" id="email" class="form-control form-control-lg" name="emailcadastro" required/>
+                                    <label class="form-label" for="email">Seu Email</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="cpf" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <label class="form-label" for="cpf">Seu CPF</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="telefone" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <label class="form-label" for="telefone">Seu Telefone</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="data_nascimento" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <label class="form-label" for="data_nascimento">Sua Data de Nascimento</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <input type="password" id="passwd" class="form-control form-control-lg" name="senhacadastro" required/>
-                                    <label class="form-label" >Senha</label>
+                                    <label class="form-label" >Sua Senha</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
