@@ -108,7 +108,7 @@
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Cadastrar</button>
                                 </div>
 
-                                <p class="text-center text-muted mt-5 mb-0">Já possui uma conta ? <a href="controlador?opcao=login"
+                                <p class="text-center text-muted mt-5 mb-0">Já possui uma conta ? <a href="login"
                                                                                                         class="fw-bold text-body"><u>Faça Login</u></a></p>
                             </form>
 

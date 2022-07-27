@@ -16,103 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Extra Bits</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
-
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .textmutex{
-            text-shadow: 2px 2px 4px #000000;
-        }
-        .img-slide{
-            min-width: 40%;
-            height: 350px;
-        }
-
-        .zoom {
-            overflow: hidden;
-        }
-
-        .zoom image {
-            max-width: 100%;
-            -moz-transition: all 0.3s;
-            -webkit-transition: all 0.3s;
-            transition: all 0.3s;
-        }
-
-        .zoom:hover image {
-            -moz-transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-        }
-
-        .text-item {
-            position: absolute;
-            left: 5%;
-            right: 5%;
-            bottom: 20px;
-            z-index: 10;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            color: #ffffff;
-            text-align: center;
-            font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-        }
-    </style>
-
+    <link href="<c:url value="/css/inicio.css"/>" type="text/css" rel="stylesheet">
 </head>
 <body>
 
@@ -124,7 +29,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary"><img src="https://cdn-icons-png.flaticon.com/512/416/416255.png" alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
+                <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://cdn-icons-png.flaticon.com/512/416/416255.png" alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -176,7 +81,7 @@
             </div>
             <div class="text-end">
                 <a href="login"><button type="button" class="btn btn-primary " >Login</button></a>
-                <a href="controlador?opcao=cadastro"><button type="button" class="btn btn-success" >Cadastrar</button></a>
+                <a href="cadastro"><button type="button" class="btn btn-success" >Cadastrar</button></a>
             </div>
             <!-- Collapsible wrapper -->
         </div>

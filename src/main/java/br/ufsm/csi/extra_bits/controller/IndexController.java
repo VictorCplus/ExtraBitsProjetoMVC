@@ -4,6 +4,7 @@ package br.ufsm.csi.extra_bits.controller;
 import br.ufsm.csi.extra_bits.dao.UsuarioDAO;
 import br.ufsm.csi.extra_bits.model.Usuario;
 import br.ufsm.csi.extra_bits.service.UsuarioService;
+import org.apache.el.stream.StreamELResolverImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,18 @@ public class IndexController {
         }
         return new RedirectView(url, true);
     }
+
+    @GetMapping("/cadastro")
+    public String cadastro(){
+        return "cadastro";
+    }
+
+    @GetMapping("/sair")
+    public RedirectView sair(HttpSession session){
+        session.invalidate();
+        return new RedirectView("/home",true);
+    }
+
 
 
 }
