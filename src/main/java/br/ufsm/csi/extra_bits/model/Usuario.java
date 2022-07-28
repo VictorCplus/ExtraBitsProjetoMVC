@@ -23,21 +23,6 @@ public class Usuario {
     public Usuario(){
 
     }
-
-    public Usuario(int id_usuario, String nome, String email, String cpf, String senha, String telefone, Date data_nascimento, Date data_cadastro) {
-        this.id_usuario = id_usuario;
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.telefone = telefone;
-        this.data_nascimento = data_nascimento;
-        this.data_cadastro = data_cadastro;
-    }
-
-    public Usuario(String nome, String email, String cpf, String senha, String telefone, String data_nascimento) {
-    }
-
     public int getId_usuario() {
         return id_usuario;
     }
@@ -59,6 +44,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
+        email =email.toLowerCase();
         this.email = email;
     }
 

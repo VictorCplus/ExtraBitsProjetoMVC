@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Aluno
-  Date: 01/06/2022
-  Time: 16:00
+  User: Cardo
+  Date: 27/07/2022
+  Time: 22:03
   To change this template use File | Settings | File Templates.
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -18,6 +18,10 @@
     <title>Extra Bits</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
     <link href="<c:url value="/css/inicio.css"/>" type="text/css" rel="stylesheet">
+    <style>
+        h1 { color: #b48608; font-family: 'Droid serif', serif; font-size: 36px; font-weight: 400; font-style: italic; line-height: 44px; margin: 0 0 12px; text-align: center; }
+        a {color: #ffffff;}
+    </style>
 </head>
 <body>
 
@@ -31,15 +35,19 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg" alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
             </ul>
-
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Pesquise aqui..." aria-label="Search">
             </form>
+            <div class="text-end position-absolute top-0 end-0">
+                <h1>Olá ${usuario_logado.nome}</h1>
+            </div>
+        </div>
+        <div class="align-text-top-right">
 
         </div>
     </div>
 
-<%--    Navbar       --%>
+    <%--    Navbar       --%>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!-- Container wrapper -->
         <div class="container-fluid">
@@ -57,17 +65,34 @@
             </button>
 
             <!-- Collapsible wrapper -->
+<%--            <div class="text-align-center">--%>
+<%--                <a href="produtos">Meus Produtos</a>--%>
+<%--                <a href="cadastroproduto">Cadastrar Produto</a>--%>
+<%--                <a href="editarperfil">Editar Perfil</a>--%>
+<%--            </div>--%>
             <div
                     class="collapse navbar-collapse justify-content-center"
                     id="navbarCenteredExample"
-            >
-                <!-- Left links -->
-
-                <!-- Left links -->
+            ><!-- Left links -->
             </div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <!-- Navbar dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item text-white" href="editarperfil">Editar Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-white" href="produtos">Meus Produtos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-white" href="cadastroproduto">Cadastrar Produto</a></li>
+                    </ul>
+                </li>
+            </ul>
             <div class="text-end">
-                <a href="login"><button type="button" class="btn btn-primary " >Login</button></a>
-                <a href="cadastro"><button type="button" class="btn btn-success" >Cadastrar</button></a>
+                <a href="carrinho">Carrinho</a>
+                <a href="sair">Sair</a>
             </div>
             <!-- Collapsible wrapper -->
         </div>
@@ -75,28 +100,9 @@
     </nav>
 </header>
 
-<!-- Colocar imagen do logo -->
-<%--<nav class="navbar bg-light">--%>
-<%--    <div class="container-fluid">--%>
-<%--        <a class="navbar-brand" href="controlador?opcao=inicio">--%>
-<%--            <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">--%>
-<%--            HardwareHere--%>
-<%--        </a>--%>
-<%--        <ul class="nav justify-content-end">--%>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link active" aria-current="page" href="controlador?opcao=login">Login</a>--%>
-<%--            </li>--%>
-<%--            <br>--%>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="controlador?opcao=cadastro">Cadastro</a>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
-<%--</nav>--%>
-
 <main>
 
-<%--    Por imagens dos slides nessa area--%>
+    <%--    Por imagens dos slides nessa area--%>
 
     <section class="py-5 text-center container">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -122,14 +128,14 @@
         </div>
     </section>
 
-<%--    Falta por imagens dos produtos nessa area e suas descrições com preço --%>
+    <%--    Falta por imagens dos produtos nessa area e suas descrições com preço --%>
     <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm zoom">
                         <a href=""><svg  class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"  focusable="false">
-                             <title>Placeholder</title><image class="img-responsive" href ="https://images.kabum.com.br/produtos/fotos/115571/placa-de-video-gigabyte-nvidia-geforce-rtx-2060-d6-6g-gddr6-gv-n2060d6-6gd_1597412926_gg.jpg" height="100%" width="100%"/><text class="text-item fw-semibold " x="50%" y="92%" fill="#ff6200">Nvidia Geforce RTX 2060 D6 6gb GDDR6 Gigabyte</text></svg></a>
+                            <title>Placeholder</title><image class="img-responsive" href ="https://images.kabum.com.br/produtos/fotos/115571/placa-de-video-gigabyte-nvidia-geforce-rtx-2060-d6-6g-gddr6-gv-n2060d6-6gd_1597412926_gg.jpg" height="100%" width="100%"/><text class="text-item fw-semibold " x="50%" y="92%" fill="#ff6200">Nvidia Geforce RTX 2060 D6 6gb GDDR6 Gigabyte</text></svg></a>
                         <div class="card-body">
                             <h5 class="card-title">Descrição:</h5>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec mauris odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales fermentum tempor. Curabitur pretium, libero non feugiat tincidunt.</p>

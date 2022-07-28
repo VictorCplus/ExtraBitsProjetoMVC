@@ -49,7 +49,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://www.pngitem.com/pimgs/m/463-4634301_hardware-logo-on-black-background-hd-png-download.png" alt="" width="50" height="50" class="d-inline-block align-text-center"> ToolsWare</a></li>
+                <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg" alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
             </ul>
         </div>
     </div>
@@ -83,32 +83,32 @@
                             <form action="/extrabits/cadastro" method="post" id="formularioCadastro">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="nome" class="form-control form-control-lg" name="nomecadastro" required/>
+                                    <input type="text" id="nome" class="form-control form-control-lg" name="nome" required/>
                                     <label class="form-label" for="nome">Seu Nome Completo</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="email" class="form-control form-control-lg" name="emailcadastro" required/>
+                                    <input type="email" id="email" class="form-control form-control-lg" name="email" required/>
                                     <label class="form-label" for="email">Seu Email</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="cpf" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <input type="text" id="cpf" class="form-control form-control-lg" name="cpf" required/>
                                     <label class="form-label" for="cpf">Seu CPF</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="telefone" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <input type="text" id="telefone" class="form-control form-control-lg" name="telefone" required/>
                                     <label class="form-label" for="telefone">Seu Telefone</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="data_nascimento" class="form-control form-control-lg" name="cpfcadastro" required/>
+                                    <input type="text" id="data_nascimento" class="form-control form-control-lg" name="data_nascimento" required/>
                                     <label class="form-label" for="data_nascimento">Sua Data de Nascimento</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="passwd" class="form-control form-control-lg" name="senhacadastro" required/>
+                                    <input type="password" id="passwd" class="form-control form-control-lg" name="senha" required/>
                                     <label class="form-label" >Sua Senha</label>
                                 </div>
 

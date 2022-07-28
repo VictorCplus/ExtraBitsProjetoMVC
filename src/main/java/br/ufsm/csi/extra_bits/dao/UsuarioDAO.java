@@ -23,11 +23,11 @@ public class UsuarioDAO {
         try(Connection connection = new ConexaoBD().getConexao()){
 
             this.sql = "SELECT * FROM" +
-                    "usuario" +
+                    " usuario " +
                     "WHERE" +
-                    "usuario.email = ?" +
+                    " usuario.email = ?" +
                     "AND" +
-                    "usuario.senha = ?";
+                    " usuario.senha = ?";
 
             preparedStatement = connection.prepareStatement(this.sql);
             preparedStatement.setString(1,email);

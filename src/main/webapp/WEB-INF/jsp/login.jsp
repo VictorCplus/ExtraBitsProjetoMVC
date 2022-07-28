@@ -27,20 +27,12 @@
       style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">>
 
 
-<%--<nav class="navbar bg-light">--%>
-<%--    <div class="container-fluid">--%>
-<%--        <a class="navbar-brand" href="controlador?opcao=inicio">--%>
-<%--            <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">--%>
-<%--            HardwareHere--%>
-<%--        </a>--%>
-<%--    </div>--%>
-<%--</nav>--%>
-
-
 <main class="form-signin w-100 m-auto">
 
     <form action="login" method="post">
-        <a href="home"><img class="mb-4" src="https://cdn-icons-png.flaticon.com/512/416/416255.png" alt="" width="72" height="57"></a>
+        <a href="home"><img class="mb-4" src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg
+
+" alt="" width="72" height="57"></a>
         <h1 class="h3 mb-3 fw-normal">Por favor faça Login</h1>
 
         <div class="form-floating">
@@ -68,45 +60,6 @@
         </h2>
     </c:if>
 </main>
-
-
-
-<%--<form action="login" method="post">--%>
-<%--    <label for="email" id="email"><b>Email: </b></label>--%>
-<%--    <input type="text"--%>
-<%--           placeholder="email"--%>
-<%--           name="email" required>--%>
-
-
-
-<%--    <form action="login" method="post" class="container-sm">--%>
-<%--        <div class="row mb-3">--%>
-<%--            <label for="email" class="col-sm-2 col-form-label" id="email">Email: </label>--%>
-
-<%--                <input type="email" class="form-control" name="email" required>--%>
-
-<%--        </div>--%>
-<%--        <div class="row mb-3">--%>
-<%--            <label for="senha" class="col-sm-2 col-form-label" id="senha">Senha: </label>--%>
-
-<%--                <input type="password" class="form-control"  name="senha" required>--%>
-
-<%--        </div>--%>
-<%--        <button type="submit" value="Login" name="login" class="btn btn-primary">Login</button>--%>
-<%--        <a href="controlador?opcao=cadastro"><button type="button", class="btn btn-primary" name="cadastro">Cadastre-se aqui !!!</button></a>--%>
-<%--    </form>--%>
-
-
-
-
-<%--    <label for="senha" id="senha"><b>Senha: </b></label>--%>
-
-<%--    <input type="password"--%>
-<%--           placeholder="senha"--%>
-<%--           name="senha" required>--%>
-
-<%--    <input type="submit" value="Login" name="login">--%>
-<%--</form>--%>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
