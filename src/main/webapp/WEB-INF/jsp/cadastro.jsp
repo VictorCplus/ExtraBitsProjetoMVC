@@ -61,10 +61,9 @@
         var inputPasswdConfirmar = document.querySelector("#passwdConfirmar");
         var passwd = inputPasswd.value;
         var passwdConfirmar = inputPasswdConfirmar.value;
-        if (passwd == passwdConfirmar){
+        if (passwd == passwdConfirmar) {
             document.getElementById("formularioCadastro").submit();
-        }
-        else{
+        } else {
             alert("As senhas não coincidem!");
         }
     }
@@ -119,10 +118,9 @@
 
                                 <div class="d-flex justify-content-center">
 <%--                                    <input type="submit" value="CADASTRAR" name="cadastro">--%>
-                                    <button type="submit" name="cadastro" value="Cadastrar" onclick="checarSenha()"
+                                    <button type="button" name="cadastro" value="Cadastrar" onclick="checarSenha()"
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Cadastrar</button>
                                 </div>
-
                                 <p class="text-center text-muted mt-5 mb-0">Já possui uma conta ? <a href="login"
                                                                                                         class="fw-bold text-body"><u>Faça Login</u></a></p>
                             </form>
@@ -140,39 +138,6 @@
         </div>
     </div>
 </section>
-
-<%--<form action="cadastro" method="post" >--%>
-<%--    <h1>Cadastro Usuário</h1>--%>
-<%--    <div class="mb-3">--%>
-<%--        <label class="form-label" for="exampleInputnome" >Nome:</label>--%>
-<%--        <input type="text" class="form-control" id="exampleInputnome" aria-describedby="nomeHelp" name="nomecadastro" required>--%>
-<%--        <div id="nomeHelp" class="form-text">Digite aqui o nome.</div>--%>
-<%--    </div>--%>
-<%--    <div class="mb-3">--%>
-<%--        <label for="exampleInputEmail1" class="form-label">Email:</label>--%>
-<%--        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="emailcadastro" required>--%>
-<%--        <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>--%>
-<%--    </div>--%>
-<%--    <div class="row g-3 align-items-center">--%>
-<%--        <div class="col-auto">--%>
-<%--            <label for="inputPassword6" class="col-form-label">Senha:</label>--%>
-<%--            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" name="senhacadastro" required>--%>
-<%--            <span id="passwordHelpInline" class="form-text">--%>
-<%--             Deve ter de 3 a 20 caracteres.--%>
-<%--            </span>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <input type="submit" value="CADASTRAR" name="cadastro">--%>
-
-<%--    <a href="controlador?opcao=voltar"> <input type="button" value="VOLTAR"/></a>--%>
-
-<%--</form>--%>
-
-<%--<c:if test="${not empty erro}">--%>
-<%--    <h2>--%>
-<%--        <b>${erro}</b>--%>
-<%--    </h2>--%>
-<%--</c:if>--%>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

@@ -83,6 +83,56 @@ public class UsuarioDAO {
         return this.status;
     }
 
+    public Usuario getperfiluser(int id){
+        Usuario usuario = null;
+
+        try(Connection connection = new ConexaoBD().getConexao()){
+
+            this.sql = "select * from usuario where id_usuario = ?";
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                usuario = new Usuario();
+                usuario.setId_usuario(resultSet.getInt("id_usuario"));
+                usuario.setNome(resultSet.getString("nome"));
+                usuario.setEmail(resultSet.getString("email"));
+                usuario.setCpf(resultSet.getString("cpf"));
+                usuario.setSenha(resultSet.getString("senha"));
+                usuario.setTelefone(resultSet.getString("telefone"));
+                usuario.setData_nascimento(resultSet.getDate("data_nascimento"));
+                usuario.setData_cadastro(resultSet.getDate("data_cadastro"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            this.status = "ERROR";
+        }
+        return usuario;
+    }
+
+
+    public String deleteuser(int id){
+        try(Connection connection = new ConexaoBD().getConexao()){
+            connection.setAutoCommit(false);
+
+            this.sql = "delete from usuario where id_usuario = ?";
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.preparedStatement.setInt(1, id);
+            this.preparedStatement.executeUpdate();
+
+            if(this.preparedStatement.getUpdateCount() > 0){
+                this.status = "OK";
+                connection.commit();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            this.status = "OK";
+        }
+        return "";
+    }
+
 
 
 
