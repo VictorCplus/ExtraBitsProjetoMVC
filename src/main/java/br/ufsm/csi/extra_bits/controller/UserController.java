@@ -26,13 +26,23 @@ public class UserController {
 
     @GetMapping("/perfil")
     public String perfil(Model model, HttpSession session){
-        Usuario usuario_logado = (Usuario)session.getAttribute("usuario_logado");
+        Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
         Usuario usuario = null;
 
         dao.getperfiluser(usuario_logado.getId_usuario());
 
         model.addAttribute("usuario", usuario);
         return "editarperfil";
+    }
+
+    @PostMapping("/editarperf")
+    public RedirectView editarperf (@ModelAttribute("usuario") Usuario usuario, HttpSession session){
+        Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
+        dao.editaruser(usuario);
+
+        dao.getperfiluser(usuario.getId_usuario());
+        session.setAttribute("usuario_logado", usuario_logado);
+        return new RedirectView("/home", true);
     }
 
     @PostMapping("/deletar")

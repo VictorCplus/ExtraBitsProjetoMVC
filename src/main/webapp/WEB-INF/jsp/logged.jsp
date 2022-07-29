@@ -82,7 +82,7 @@
                         Menu
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item text-white" href="editarperfil">Editar Perfil</a></li>
+                        <li><a class="dropdown-item text-white" href="/extrabits/perfil">Editar Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item text-white" href="produtos">Meus Produtos</a></li>
                         <li><hr class="dropdown-divider"></li>

@@ -102,7 +102,7 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="data_nascimento" class="form-control form-control-lg" name="data_nascimento" required/>
+                                    <input type="date" id="data_nascimento" class="form-control form-control-lg" name="data_nascimento" required/>
                                     <label class="form-label" for="data_nascimento">Sua Data de Nascimento</label>
                                 </div>
 

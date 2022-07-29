@@ -11,25 +11,38 @@
 <html>
 <head>
     <title>Perfil</title>
+
+    <script>
+        function formatdate(valor = ${usuario_logado.data_cadastro}){
+            var data = valor.split('-').reverse().join('/');
+            document.getElementById("aqui").innerHTML = data;
+        }
+    </script>
+
+
 </head>
 <body>
 <h1>Editar perfil....</h1>
 
-<form action="user_controller" method="post">
-    <input type="hidden" name="id" value="${usuario_logado.id}">
-    <input type="text" value="${usuario_logado.name}" name="nome" id="nome">
+<form action="/extrabits/editarperf" method="post">
+    <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
+    <input type="text" value="${usuario_logado.nome}" name="nome" id="nome">
     <input type="text" value="${usuario_logado.email}" name="email" id="email">
+    <input type="text" value="${usuario_logado.cpf}" name="cpf" id="cpf">
     <input type="text" value="${usuario_logado.senha}" name="senha" id="senha">
+    <input type="text" value="${usuario_logado.telefone}" name="telefone" id="telefone">
+    <input type="date" value="${usuario_logado.data_nascimento}" name="data_nascimento" id="data_nascimento">
 
     <input type="hidden" name="opcao" value="editar">
     <input type="submit" value="Salvar">
 </form>
 
 
+<%--const data = '2020-10-20'.split('-').reverse().join('/');--%>
 
+<h1 id="aqui">Conta criada em ${data}</h1>
+<h1></h1>
 <%--<button><a href="controlador?opcao=opcao">Voltar</a></button>--%>
-<a href="controlador?opcao=voltar"> <input type="button" value="VOLTAR"/></a>
-<br>
-<a href="controlador?opcao=logout"> <input type="button" value="SAIR"/></a>
+<a href="home"> <input type="button" value="VOLTAR"/></a>
 </body>
 </html>

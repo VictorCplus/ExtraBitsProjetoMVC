@@ -112,6 +112,22 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    public String editaruser(Usuario user){
+
+        try(Connection connection = new ConexaoBD().getConexao()){
+
+            connection.setAutoCommit(false);
+
+            this.sql = "";
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
 
     public String deleteuser(int id){
         try(Connection connection = new ConexaoBD().getConexao()){
