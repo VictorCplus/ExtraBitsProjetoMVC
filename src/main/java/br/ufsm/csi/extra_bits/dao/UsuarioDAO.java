@@ -118,8 +118,16 @@ public class UsuarioDAO {
 
             connection.setAutoCommit(false);
 
-            this.sql = "";
+            this.sql = "update usuario set " +
+                    "nome = ?, " +
+                    "email = ?, " +
+                    "cpf = ?, " +
+                    "senha = ?, " +
+                    "telefone = ?, " +
+                    "data_nascimento = ? " +
+                    "where id_usuario = ?;";
 
+            this.preparedStatement = connection.prepareStatement(this.sql);
 
         }catch (SQLException e){
             e.printStackTrace();

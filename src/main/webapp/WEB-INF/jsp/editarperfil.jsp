@@ -11,15 +11,6 @@
 <html>
 <head>
     <title>Perfil</title>
-
-    <script>
-        function formatdate(valor = ${usuario_logado.data_cadastro}){
-            var data = valor.split('-').reverse().join('/');
-            document.getElementById("aqui").innerHTML = data;
-        }
-    </script>
-
-
 </head>
 <body>
 <h1>Editar perfil....</h1>
@@ -40,9 +31,9 @@
 
 <%--const data = '2020-10-20'.split('-').reverse().join('/');--%>
 
-<h1 id="aqui">Conta criada em ${data}</h1>
-<h1></h1>
+<h1>Conta criada em <input type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: bold; font-family: 'Arial Black'; font-size: large" disabled></h1>
+
 <%--<button><a href="controlador?opcao=opcao">Voltar</a></button>--%>
-<a href="home"> <input type="button" value="VOLTAR"/></a>
+<a href="home"> <input type="button" value="VOLTAR" /></a>
 </body>
 </html>
