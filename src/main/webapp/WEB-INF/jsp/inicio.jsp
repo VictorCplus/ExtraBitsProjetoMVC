@@ -18,9 +18,14 @@
     <title>Extra Bits</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
     <link href="<c:url value="/css/inicio.css"/>" type="text/css" rel="stylesheet">
+    <style>
+        h1 { color: #b48608; font-family: 'Droid serif', serif; font-size: 36px; font-weight: 400; font-style: italic; line-height: 44px; margin: 0 0 12px; text-align: center; }
+        a {color: #ffffff;}
+    </style>
 </head>
 <body>
-
+<c:choose>
+    <c:when test="${usuario_logado == null}">
 <header class="p-3 bg-dark text-white">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -59,7 +64,7 @@
             <!-- Collapsible wrapper -->
             <div
                     class="collapse navbar-collapse justify-content-center"
-                    id="navbarCenteredExample"
+
             >
                 <!-- Left links -->
 
@@ -74,6 +79,86 @@
         <!-- Container wrapper -->
     </nav>
 </header>
+    </c:when>
+</c:choose>
+<c:choose>
+    <c:when test="${usuario_logado != null}">
+<header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="home" class="nav-link px-2 text-secondary"><img src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg" alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
+                </ul>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Pesquise aqui..." aria-label="Search">
+                </form>
+                <div class="text-end position-absolute top-0 end-0 me-4">
+                    <h1>Olá ${usuario_logado.nome}</h1>
+                </div>
+            </div>
+            <div class="align-text-top-right">
+
+            </div>
+        </div>
+
+            <%--    Navbar       --%>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarCenteredExample"
+                        aria-controls="navbarCenteredExample"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                    <%--            <div class="text-align-center">--%>
+                    <%--                <a href="produtos">Meus Produtos</a>--%>
+                    <%--                <a href="cadastroproduto">Cadastrar Produto</a>--%>
+                    <%--                <a href="editarperfil">Editar Perfil</a>--%>
+                    <%--            </div>--%>
+                <div
+                        class="collapse navbar-collapse justify-content-center"
+                        id="navbarCenteredExample"
+                ><!-- Left links -->
+                </div>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <!-- Navbar dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
+                            <li><a class="dropdown-item text-white" href="/extrabits/perfil">Editar Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-white" href="produtos">Meus Produtos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-white" href="cadastroproduto">Cadastrar Produto</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="text-end">
+                    <a href="carrinho">Carrinho</a>
+                    <a href="sair">Sair</a>
+                </div>
+                <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+    </header>
+    </c:when>
+</c:choose>
 
 <!-- Colocar imagen do logo -->
 <%--<nav class="navbar bg-light">--%>

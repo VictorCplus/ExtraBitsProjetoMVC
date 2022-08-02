@@ -27,11 +27,10 @@ public class UserController {
     @GetMapping("/perfil")
     public String perfil(Model model, HttpSession session){
         Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
-        Usuario usuario = null;
 
         dao.getperfiluser(usuario_logado.getId_usuario());
 
-        model.addAttribute("usuario", usuario);
+        model.addAttribute("usuario", usuario_logado);
         return "editarperfil";
     }
 
@@ -40,14 +39,14 @@ public class UserController {
         Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
         dao.editaruser(usuario);
 
-        dao.getperfiluser(usuario.getId_usuario());
+        dao.getperfiluser(usuario_logado.getId_usuario());
         session.setAttribute("usuario_logado", usuario_logado);
         return new RedirectView("/home", true);
     }
 
     @PostMapping("/deletar")
     public RedirectView deletar(@RequestParam int id){
-        dao.deleteuser(id);
+        dao.deleteUser(id);
 
         return new RedirectView("/sair", true);
     }

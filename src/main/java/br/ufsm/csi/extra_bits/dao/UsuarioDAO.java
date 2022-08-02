@@ -89,7 +89,9 @@ public class UsuarioDAO {
         try(Connection connection = new ConexaoBD().getConexao()){
 
             this.sql = "select * from usuario where id_usuario = ?";
-            this.preparedStatement = connection.prepareStatement(this.sql);
+
+
+            preparedStatement = connection.prepareStatement(this.sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
@@ -107,7 +109,6 @@ public class UsuarioDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            this.status = "ERROR";
         }
         return usuario;
     }
@@ -125,9 +126,22 @@ public class UsuarioDAO {
                     "senha = ?, " +
                     "telefone = ?, " +
                     "data_nascimento = ? " +
-                    "where id_usuario = ?;";
+                    "where id_usuario = ?";
 
             this.preparedStatement = connection.prepareStatement(this.sql);
+            this.preparedStatement.setString(1, user.getNome());
+            this.preparedStatement.setString(2, user.getEmail());
+            this.preparedStatement.setString(3, user.getCpf());
+            this.preparedStatement.setString(4, user.getSenha());
+            this.preparedStatement.setString(5, user.getTelefone());
+            this.preparedStatement.setDate(6, user.getData_nascimento());
+            this.preparedStatement.setInt(7, user.getId_usuario());
+            this.preparedStatement.executeUpdate();
+
+            if(this.preparedStatement.getUpdateCount() > 0){
+                this.status = "OK";
+                connection.commit();
+            }
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -135,9 +149,7 @@ public class UsuarioDAO {
         return "";
     }
 
-
-
-    public String deleteuser(int id){
+    public String deleteUser(int id){
         try(Connection connection = new ConexaoBD().getConexao()){
             connection.setAutoCommit(false);
 
@@ -156,8 +168,5 @@ public class UsuarioDAO {
         }
         return "";
     }
-
-
-
 
 }

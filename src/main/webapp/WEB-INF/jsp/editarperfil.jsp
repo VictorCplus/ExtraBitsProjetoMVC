@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<html>
+<html lang="pt-br">
 <head>
     <title>Perfil</title>
 </head>
@@ -24,16 +24,153 @@
     <input type="text" value="${usuario_logado.telefone}" name="telefone" id="telefone">
     <input type="date" value="${usuario_logado.data_nascimento}" name="data_nascimento" id="data_nascimento">
 
-    <input type="hidden" name="opcao" value="editar">
-    <input type="submit" value="Salvar">
+    <input type="submit" name="editarperf" value="Salvar">
 </form>
 
 
 <%--const data = '2020-10-20'.split('-').reverse().join('/');--%>
 
-<h1>Conta criada em <input type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: bold; font-family: 'Arial Black'; font-size: large" disabled></h1>
+<h1>Conta criada desde <input type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: bold; font-family: 'Arial Black'; font-size: larger" disabled></h1>
 
+<form action="/extrabits/deletar" method="post">
+    <div>
+        <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
+        <input class="btn btn-light" type="submit" id="inputDeletarConfirmar" value="DELETAR CONTA"
+               alt="Deletar sua conta" style="display: none">
+        <input class="btn btn-light" type="button" id="inputDeletar" value="DELETAR CONTA"
+               alt="Deletar sua conta" onclick="deletarConta()">
+    </div>
+</form>
+
+<%--<a href="/extrabits/deletar"> <input type="button" value="Deletar Conta" /></a>--%>
 <%--<button><a href="controlador?opcao=opcao">Voltar</a></button>--%>
 <a href="home"> <input type="button" value="VOLTAR" /></a>
+
+<script>
+    let photo = document.getElementById('imgArteUp')
+    let file = document.getElementById('arteUp')
+    let imagem = document.getElementById('imagem')
+    let containerCadastro = document.getElementById('containerCadastro')
+    let tituloCadastro = document.getElementById('tituloCadastro')
+    let tituloLogin = document.getElementById('tituloLogin')
+    let containerLogin = document.getElementById('containerLogin')
+    let btnCadastrar
+    let tipo_conta = document.getElementById('tipo_conta')
+    let inputDeletar = document.getElementById('inputDeletar')
+    let inputDeletarConfirmar = document.getElementById('inputDeletarConfirmar')
+    let primeiro_nome = document.getElementById('primeiro_nome');
+    let segundo_nome = document.getElementById('segundo_nome');
+    let email = document.getElementById('email');
+    let cpf = document.getElementById('cpf');
+    let senha = document.getElementById('senha');
+    let rSenha = document.getElementById('rSenha');
+    let cadastrarUsuario = document.getElementById('cadastrarUsuario');
+    let cadastrarUsuarioConfirmar = document.getElementById('cadastrarUsuarioConfirmar');
+    let editarUsuarioCampos = document.getElementById('editarUsuarioCampos');
+
+    photo.addEventListener('click', () => {
+        file.click()
+    })
+
+    file.addEventListener('change', (e) => {
+        let reader = new FileReader()
+
+        reader.onload = () => {
+            photo.src = reader.result
+            console.log(photo.src)
+            imagem.value = photo.src;
+            console.log(imagem.value)
+        }
+        reader.readAsDataURL(file.files[0])
+        imagem.value = photo.src;
+    })
+
+    function cadastrarComprador() {
+        tituloCadastro.innerHTML = 'Cadastrando Comprador'
+        containerCadastro.style.display = 'block'
+        containerCadastro.style.borderBlockColor = 'white'
+        btnCadastrar = document.getElementById('btnCadastrar')
+        btnCadastrar.value = 'C'
+    }
+
+    function cadastrarArtista() {
+        tituloCadastro.innerHTML = 'Cadastrando Artista'
+        containerCadastro.style.display = 'block'
+        btnCadastrar = document.getElementById('btnCadastrar')
+        btnCadastrar.value = 'A'
+    }
+
+    function loginComprador() {
+        tituloLogin.innerHTML = 'Logar como Comprador'
+        containerLogin.style.display = 'block'
+        tipo_conta.value = 'C'
+    }
+
+    function loginArtista() {
+        tituloLogin.innerHTML = 'Logar como Artista'
+        containerLogin.style.display = 'block'
+        tipo_conta.value = 'A'
+    }
+
+    function deletarConta(){
+        Swal.fire({
+            title: 'Tem certeza que deseja deletar sua conta?',
+            text: "Essa ação não pode ser revertida!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SIM, DELETAR',
+            cancelButtonText: 'CANCELAR'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                inputDeletarConfirmar.click();
+            }
+        })
+    }
+
+    function cadastrarUsuarioCampos(acao) {
+        if (primeiro_nome.value != '') {
+            if (segundo_nome.value != '') {
+                if (email.value != '' ) {
+                    if (cpf.value != '' && cpf.value.length == 14) {
+                        if (senha.value != '') {
+                            if (senha.value == rSenha.value) {
+                                switch (acao) {
+                                    case 'cadastrar':
+                                        cadastrarUsuarioConfirmar.click();
+                                        break;
+                                    case 'editar':
+                                        editarUsuarioCampos.click();
+                                        break;
+                                }
+                            } else {
+                                campoComErro('As senhas não coincidem');
+                            }
+                        } else {
+                            campoComErro('Senha não pode estar vazia');
+                        }
+                    } else {
+                        campoComErro('CPF inválido');
+                    }
+                } else {
+                    campoComErro('Email não pode estar vazio');
+                }
+            } else {
+                campoComErro('Segundo nome não pode estar vazio');
+            }
+        } else {
+            campoComErro('Primeiro nome não pode estar vazio');
+        }
+    }
+
+    function campoComErro(mensagem) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Algo deu errado',
+            text: mensagem
+        })
+    }
+</script>
 </body>
 </html>

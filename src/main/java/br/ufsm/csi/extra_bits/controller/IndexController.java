@@ -28,11 +28,7 @@ public class IndexController {
     @GetMapping("/home")
     public String inicio(Model model, HttpSession session) {
         Usuario usuario_logado = (Usuario)session.getAttribute("usuario_logado");
-        String url = "logged";
-        if(usuario_logado == null){
-            return "inicio";
-        }
-        return url;
+        return "inicio";
     }
 
     @GetMapping("/login")
