@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 
 @Controller
 public class UserController {
@@ -35,17 +36,25 @@ public class UserController {
     }
 
     @PostMapping("/editarperf")
-    public RedirectView editarperf (@ModelAttribute("usuario") Usuario usuario, HttpSession session){
+    public RedirectView editarperf (@RequestParam int id,@RequestParam String nome, @RequestParam String email, @RequestParam String cpf, @RequestParam String senha, @RequestParam String telefone, @RequestParam Date data_nascimento, HttpSession session){
         Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
-        dao.editaruser(usuario);
+        usuario_logado.setId_usuario(id);
+        usuario_logado.setNome(nome);
+        usuario_logado.setEmail(email);
+        usuario_logado.setCpf(cpf);
+        usuario_logado.setSenha(senha);
+        usuario_logado.setTelefone(telefone);
+        usuario_logado.setData_nascimento(data_nascimento);
+        dao.editaruser(usuario_logado);
 
         dao.getperfiluser(usuario_logado.getId_usuario());
         session.setAttribute("usuario_logado", usuario_logado);
-        return new RedirectView("/home", true);
+        return new RedirectView("/perfil", true);
     }
 
     @PostMapping("/deletar")
     public RedirectView deletar(@RequestParam int id){
+        System.out.println(id);
         dao.deleteUser(id);
 
         return new RedirectView("/sair", true);

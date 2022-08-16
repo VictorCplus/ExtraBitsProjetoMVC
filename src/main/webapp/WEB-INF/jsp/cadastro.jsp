@@ -15,7 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
+    <script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="js/jquery.maskedinput.min.js"/></script>
     <style>
         .gradient-custom-3 {
             /* fallback for old browsers */
@@ -54,21 +55,6 @@
         </div>
     </div>
 </header>
-
-<script>
-    function checarSenha() {
-        var inputPasswd = document.querySelector("#passwd");
-        var inputPasswdConfirmar = document.querySelector("#passwdConfirmar");
-        var passwd = inputPasswd.value;
-        var passwdConfirmar = inputPasswdConfirmar.value;
-        if (passwd == passwdConfirmar) {
-            document.getElementById("formularioCadastro").submit();
-        } else {
-            alert("As senhas não coincidem!");
-        }
-    }
-</script>
-
 <section class="vh-100% bg-image"
          style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -83,7 +69,7 @@
 
                                 <div class="form-outline mb-4">
                                     <input type="text" id="nome" class="form-control form-control-lg" name="nome" required/>
-                                    <label class="form-label" for="nome">Seu Nome Completo</label>
+                                    <label class="form-label" for="nome">Seu Nome</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -92,13 +78,13 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="cpf" class="form-control form-control-lg" name="cpf" required/>
-                                    <label class="form-label" for="cpf">Seu CPF</label>
+                                    <input type="text" id="cpf" oninput="mascara(this)" class="form-control form-control-lg" name="cpf" required/>
+                                    <label class="form-label" for="cpf">Seu CPF  *Digite apenas números.</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="telefone" class="form-control form-control-lg" name="telefone" required/>
-                                    <label class="form-label" for="telefone">Seu Telefone</label>
+                                    <input type="text" id="telefone" onkeydown="return mascaraTelefone(event)" class="form-control form-control-lg" name="telefone" required/>
+                                    <label class="form-label" for="telefone">Seu Telefone  *Digite apenas números.</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -139,6 +125,62 @@
     </div>
 </section>
 
+<script>
+    function checarSenha() {
+        var inputPasswd = document.querySelector("#passwd");
+        var inputPasswdConfirmar = document.querySelector("#passwdConfirmar");
+        var passwd = inputPasswd.value;
+        var passwdConfirmar = inputPasswdConfirmar.value;
+        if (passwd == passwdConfirmar) {
+            document.getElementById("formularioCadastro").submit();
+        } else {
+            alert("As senhas não coincidem!");
+        }
+    }
+    function mascara(i){
+
+        var v = i.value;
+
+        if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+            i.value = v.substring(0, v.length-1);
+            return;
+        }
+
+        i.setAttribute("maxlength", "14");
+        if (v.length == 3 || v.length == 7) i.value += ".";
+        if (v.length == 11) i.value += "-";
+
+    }
+    function mascaraTelefone(event) {
+        let tecla = event.key;
+        let telefone = event.target.value.replace(/\D+/g, "");
+
+        if (/^[0-9]$/i.test(tecla)) {
+            telefone = telefone + tecla;
+            let tamanho = telefone.length;
+
+            if (tamanho >= 12) {
+                return false;
+            }
+
+            if (tamanho > 10) {
+                telefone = telefone.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (tamanho > 5) {
+                telefone = telefone.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (tamanho > 2) {
+                telefone = telefone.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+            } else {
+                telefone = telefone.replace(/^(\d*)/, "($1");
+            }
+
+            event.target.value = telefone;
+        }
+
+        if (!["Backspace", "Delete"].includes(tecla)) {
+            return false;
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>

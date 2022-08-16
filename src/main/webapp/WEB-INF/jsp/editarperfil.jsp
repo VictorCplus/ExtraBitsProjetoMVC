@@ -10,167 +10,192 @@
 <%@ page isELIgnored="false" %>
 <html lang="pt-br">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Perfil</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
+    <style>
+        body {
+            background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')
+        }
+        .gradient-custom-3 {
+            /* fallback for old browsers */
+            background: #84fab0;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+        }
+        .gradient-custom-4 {
+            /* fallback for old browsers */
+            background: #84fab0;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #84fab0
+        }
+        .labels {
+            font-size: 11px
+        }
+        .olho {
+            cursor: pointer;
+            left: 160px;
+            position: absolute;
+            width: 20px;
+        }
+    </style>
 </head>
-<body>
-<h1>Editar perfil....</h1>
+<body class="gradient-custom-3 vh-100% bg-image">
 
-<form action="/extrabits/editarperf" method="post">
-    <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
-    <input type="text" value="${usuario_logado.nome}" name="nome" id="nome">
-    <input type="text" value="${usuario_logado.email}" name="email" id="email">
-    <input type="text" value="${usuario_logado.cpf}" name="cpf" id="cpf">
-    <input type="text" value="${usuario_logado.senha}" name="senha" id="senha">
-    <input type="text" value="${usuario_logado.telefone}" name="telefone" id="telefone">
-    <input type="date" value="${usuario_logado.data_nascimento}" name="data_nascimento" id="data_nascimento">
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">${usuario_logado.nome}</span><span class="text-black-50">${usuario_logado.email}</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <h2 style="font-size: 20px; font-weight: normal; font-family: sans-serif;">Criada em:<input class="d-flex flex-column align-items-center text-center" type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px;" disabled></h2>
+            </div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-10">
+            <form action="/extrabits/deletar" method="post">
+                <div>
+                    <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
+                    <button class="w-90 btn btn-lg btn-danger" type="submit" name="deletar" onclick="return confirm('Deseja excluir sua conta ? ' +
+                     'Cuidado essa ação não tem como ser desfeita após cofirmada !')" >Deletar Conta</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Opções de Perfil</h4>
+                </div>
+                <form action="/extrabits/editarperf" method="post">
+                    <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
+                <div class="row mt-2">
+                    <div class="col-md-12"><label class="labels">Nome</label><input type="text" class="form-control" value="${usuario_logado.nome}" name="nome" id="nome"></div>
+                </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control" value="${usuario_logado.email}" name="email" id="email"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">CPF</label><input type="text" oninput="mascara(this)" class="form-control" value="${usuario_logado.cpf}" name="cpf" id="cpf"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Senha</label><input type="password" class="form-control" value="${usuario_logado.senha}" name="senha" id="pass"><img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" id="olho" width="5%"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Telefone</label><input type="text" onkeydown="return mascaraTelefone(event)" class="form-control" value="${usuario_logado.telefone}" name="telefone" id="telefone"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">State</label><input type="date" class="form-control" value="${usuario_logado.data_nascimento}" name="data_nascimento" id="data_nascimento"></div>
+                    </div>
+                <div class="mt-3 p-2 py-2 text-center"><button type="submit" name="editarperf" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Salvar Perfil</button>
+                    <a href="home" type="button" class="w-10 btn btn-lg btn-secondary">Cancelar</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 
-    <input type="submit" name="editarperf" value="Salvar">
-</form>
+<script>
+    document.getElementById('olho').addEventListener('mousedown', function() {
+        document.getElementById('pass').type = 'text';
+    });
+
+    document.getElementById('olho').addEventListener('mouseup', function() {
+        document.getElementById('pass').type = 'password';
+    });
+
+    // Para que o password não fique exposto apos mover a imagem.
+    document.getElementById('olho').addEventListener('mousemove', function() {
+        document.getElementById('pass').type = 'password';
+    });
+    function mascara(i){
+
+        var v = i.value;
+
+        if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+            i.value = v.substring(0, v.length-1);
+            return;
+        }
+
+        i.setAttribute("maxlength", "14");
+        if (v.length == 3 || v.length == 7) i.value += ".";
+        if (v.length == 11) i.value += "-";
+
+    }
+    function mascaraTelefone(event) {
+        let tecla = event.key;
+        let telefone = event.target.value.replace(/\D+/g, "");
+
+        if (/^[0-9]$/i.test(tecla)) {
+            telefone = telefone + tecla;
+            let tamanho = telefone.length;
+
+            if (tamanho >= 12) {
+                return false;
+            }
+
+            if (tamanho > 10) {
+                telefone = telefone.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (tamanho > 5) {
+                telefone = telefone.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (tamanho > 2) {
+                telefone = telefone.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+            } else {
+                telefone = telefone.replace(/^(\d*)/, "($1");
+            }
+
+            event.target.value = telefone;
+        }
+
+        if (!["Backspace", "Delete"].includes(tecla)) {
+            return false;
+        }
+    }
+</script>
+<%--<h1>Editar perfil....</h1>--%>
+
+<%--<form action="/extrabits/editarperf" method="post">--%>
+<%--    <input type="hidden" name="id" value="${usuario_logado.id_usuario}">--%>
+<%--    <input type="text" value="${usuario_logado.nome}" name="nome" id="nome">--%>
+<%--    <input type="text" value="${usuario_logado.email}" name="email" id="email">--%>
+<%--    <input type="text" value="${usuario_logado.cpf}" name="cpf" id="cpf">--%>
+<%--    <input type="text" value="${usuario_logado.senha}" name="senha" id="senha">--%>
+<%--    <input type="text" value="${usuario_logado.telefone}" name="telefone" id="telefone">--%>
+<%--    <input type="date" value="${usuario_logado.data_nascimento}" name="data_nascimento" id="data_nascimento">--%>
+
+<%--    <input type="submit" name="editarperf" value="Salvar">--%>
+<%--</form>--%>
 
 
 <%--const data = '2020-10-20'.split('-').reverse().join('/');--%>
 
-<h1>Conta criada desde <input type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: bold; font-family: 'Arial Black'; font-size: larger" disabled></h1>
+<%--<h1>Conta criada desde <input type="date" value="${usuario_logado.data_cadastro}" style="border: none; background: transparent; font-weight: bold; font-family: 'Arial Black'; font-size: larger" disabled></h1>--%>
 
-<form action="/extrabits/deletar" method="post">
-    <div>
-        <input type="hidden" name="id" value="${usuario_logado.id_usuario}">
-        <input class="btn btn-light" type="submit" id="inputDeletarConfirmar" value="DELETAR CONTA"
-               alt="Deletar sua conta" style="display: none">
-        <input class="btn btn-light" type="button" id="inputDeletar" value="DELETAR CONTA"
-               alt="Deletar sua conta" onclick="deletarConta()">
-    </div>
-</form>
+<%--<form action="/extrabits/deletar" method="post">--%>
+<%--    <div>--%>
+<%--        <input type="hidden" name="id" value="${usuario_logado.id_usuario}">--%>
+<%--        <input type="submit" name="deletar" value="Deletar Conta">--%>
+<%--    </div>--%>
+<%--</form>--%>
 
-<%--<a href="/extrabits/deletar"> <input type="button" value="Deletar Conta" /></a>--%>
-<%--<button><a href="controlador?opcao=opcao">Voltar</a></button>--%>
-<a href="home"> <input type="button" value="VOLTAR" /></a>
+<%--&lt;%&ndash;<a href="/extrabits/deletar"> <input type="button" value="Deletar Conta" /></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<button><a href="controlador?opcao=opcao">Voltar</a></button>&ndash;%&gt;--%>
+<%--<a href="home"> <input type="button" value="VOLTAR" /></a>--%>
 
-<script>
-    let photo = document.getElementById('imgArteUp')
-    let file = document.getElementById('arteUp')
-    let imagem = document.getElementById('imagem')
-    let containerCadastro = document.getElementById('containerCadastro')
-    let tituloCadastro = document.getElementById('tituloCadastro')
-    let tituloLogin = document.getElementById('tituloLogin')
-    let containerLogin = document.getElementById('containerLogin')
-    let btnCadastrar
-    let tipo_conta = document.getElementById('tipo_conta')
-    let inputDeletar = document.getElementById('inputDeletar')
-    let inputDeletarConfirmar = document.getElementById('inputDeletarConfirmar')
-    let primeiro_nome = document.getElementById('primeiro_nome');
-    let segundo_nome = document.getElementById('segundo_nome');
-    let email = document.getElementById('email');
-    let cpf = document.getElementById('cpf');
-    let senha = document.getElementById('senha');
-    let rSenha = document.getElementById('rSenha');
-    let cadastrarUsuario = document.getElementById('cadastrarUsuario');
-    let cadastrarUsuarioConfirmar = document.getElementById('cadastrarUsuarioConfirmar');
-    let editarUsuarioCampos = document.getElementById('editarUsuarioCampos');
-
-    photo.addEventListener('click', () => {
-        file.click()
-    })
-
-    file.addEventListener('change', (e) => {
-        let reader = new FileReader()
-
-        reader.onload = () => {
-            photo.src = reader.result
-            console.log(photo.src)
-            imagem.value = photo.src;
-            console.log(imagem.value)
-        }
-        reader.readAsDataURL(file.files[0])
-        imagem.value = photo.src;
-    })
-
-    function cadastrarComprador() {
-        tituloCadastro.innerHTML = 'Cadastrando Comprador'
-        containerCadastro.style.display = 'block'
-        containerCadastro.style.borderBlockColor = 'white'
-        btnCadastrar = document.getElementById('btnCadastrar')
-        btnCadastrar.value = 'C'
-    }
-
-    function cadastrarArtista() {
-        tituloCadastro.innerHTML = 'Cadastrando Artista'
-        containerCadastro.style.display = 'block'
-        btnCadastrar = document.getElementById('btnCadastrar')
-        btnCadastrar.value = 'A'
-    }
-
-    function loginComprador() {
-        tituloLogin.innerHTML = 'Logar como Comprador'
-        containerLogin.style.display = 'block'
-        tipo_conta.value = 'C'
-    }
-
-    function loginArtista() {
-        tituloLogin.innerHTML = 'Logar como Artista'
-        containerLogin.style.display = 'block'
-        tipo_conta.value = 'A'
-    }
-
-    function deletarConta(){
-        Swal.fire({
-            title: 'Tem certeza que deseja deletar sua conta?',
-            text: "Essa ação não pode ser revertida!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SIM, DELETAR',
-            cancelButtonText: 'CANCELAR'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                inputDeletarConfirmar.click();
-            }
-        })
-    }
-
-    function cadastrarUsuarioCampos(acao) {
-        if (primeiro_nome.value != '') {
-            if (segundo_nome.value != '') {
-                if (email.value != '' ) {
-                    if (cpf.value != '' && cpf.value.length == 14) {
-                        if (senha.value != '') {
-                            if (senha.value == rSenha.value) {
-                                switch (acao) {
-                                    case 'cadastrar':
-                                        cadastrarUsuarioConfirmar.click();
-                                        break;
-                                    case 'editar':
-                                        editarUsuarioCampos.click();
-                                        break;
-                                }
-                            } else {
-                                campoComErro('As senhas não coincidem');
-                            }
-                        } else {
-                            campoComErro('Senha não pode estar vazia');
-                        }
-                    } else {
-                        campoComErro('CPF inválido');
-                    }
-                } else {
-                    campoComErro('Email não pode estar vazio');
-                }
-            } else {
-                campoComErro('Segundo nome não pode estar vazio');
-            }
-        } else {
-            campoComErro('Primeiro nome não pode estar vazio');
-        }
-    }
-
-    function campoComErro(mensagem) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Algo deu errado',
-            text: mensagem
-        })
-    }
-</script>
 </body>
 </html>

@@ -22,6 +22,31 @@
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
 
+    <style>
+
+        .gradient-custom-3 {
+            /* fallback for old browsers */
+            background: #84fab0;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+        }
+
+        .gradient-custom-4 {
+            /* fallback for old browsers */
+            background: #84fab0;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+        }
+    </style>
+
 </head>
 <body class="text-center vh-100 bg-image"
       style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">>
@@ -33,7 +58,7 @@
         <a href="home"><img class="mb-4" src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg
 
 " alt="" width="72" height="57"></a>
-        <h1 class="h3 mb-3 fw-normal">Por favor faça Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Por favor faça login</h1>
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="nome@exemplo.com"  name="email" required>
@@ -43,13 +68,11 @@
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="senha" required>
             <label for="floatingPassword">Senha:</label>
         </div>
-
         <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Lembre-me
-            </label>
+            <p class="text-center text-muted mt-5 mb-0">Não tem uma conta ? <a href="cadastro"
+                                                                                 class="fw-bold text-body"><u>Cadastre-se</u></a></p>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit" value="Login" name="login">Login</button>
+        <button class="w-100 btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" value="Login" name="login">Login</button>
     </form>
     <br>
     <a href="home"><button class="w-50 btn btn-lg btn-danger" value="Voltar" name="voltar">Voltar</button></a>

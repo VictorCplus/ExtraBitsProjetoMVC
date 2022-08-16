@@ -113,7 +113,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public String editaruser(Usuario user){
+    public void editaruser(Usuario user){
 
         try(Connection connection = new ConexaoBD().getConexao()){
 
@@ -146,7 +146,7 @@ public class UsuarioDAO {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return "";
+
     }
 
     public String deleteUser(int id){
@@ -156,7 +156,7 @@ public class UsuarioDAO {
             this.sql = "delete from usuario where id_usuario = ?";
             this.preparedStatement = connection.prepareStatement(this.sql);
             this.preparedStatement.setInt(1, id);
-            this.preparedStatement.executeUpdate();
+            this.preparedStatement.execute();
 
             if(this.preparedStatement.getUpdateCount() > 0){
                 this.status = "OK";
