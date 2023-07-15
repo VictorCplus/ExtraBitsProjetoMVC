@@ -20,6 +20,8 @@ public class Usuario {
 
     private Date data_cadastro;
 
+    private int permissao;
+
     public Usuario(){
 
     }
@@ -86,5 +88,13 @@ public class Usuario {
 
     public void setData_cadastro(Date data_cadastro) {
         this.data_cadastro = data_cadastro;
+    }
+
+    public int getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
     }
 }

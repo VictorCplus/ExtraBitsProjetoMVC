@@ -6,7 +6,8 @@ Create table usuario (
 	senha varchar(100) not null,
 	telefone varchar(20) not null,
 	data_nascimento date,
-	data_cadastro date
+	data_cadastro date,
+	permissao int
 );
 
 create table produto (
@@ -14,7 +15,7 @@ create table produto (
 	nome varchar(100) not null,
 	categoria varchar(100) not null,
 	valor decimal not null,
-	descricao varchar(100) not null,
+	descricao varchar(9999) not null,
 	imagem text not null,
 	data_adicionado date,
 	id_usuario int,
@@ -31,3 +32,11 @@ create table carrinho (
 
 insert into usuario (nome, email, cpf, senha, telefone, data_nascimento, data_cadastro) 
 values ('admin admin', 'admin@admin.com', '00000000000', '1234','5599999999', '10/10/1000', CURRENT_DATE);
+
+
+
+insert into produto (nome, categoria, valor, descricao, imagem, data_adicionado) 
+values ('Nvidia Geforce RTX 2060 D6 6gb GDDR6 Gigabyte', 'Placa de Video', 5200.00, 
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec mauris odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales fermentum tempor. Curabitur pretium, libero non feugiat tincidunt.',
+		'https://images.kabum.com.br/produtos/fotos/115571/placa-de-video-gigabyte-nvidia-geforce-rtx-2060-d6-6g-gddr6-gv-n2060d6-6gd_1597412926_gg.jpg', 
+		CURRENT_DATE);

@@ -44,6 +44,7 @@ public class UsuarioDAO {
                 user.setTelefone(resultSet.getString("telefone"));
                 user.setData_nascimento(resultSet.getDate("data_nascimento"));
                 user.setData_cadastro(resultSet.getDate("data_cadastro"));
+                user.setPermissao(resultSet.getInt("permissao"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -57,8 +58,8 @@ public class UsuarioDAO {
 
             connection.setAutoCommit(false);
 
-            this.sql ="insert into usuario (nome, email, cpf, senha, telefone, data_nascimento, data_cadastro) " +
-                    "values (?, ?, ?, ?, ?, ?, CURRENT_DATE);";
+            this.sql ="insert into usuario (nome, email, cpf, senha, telefone, data_nascimento, data_cadastro, permissao) " +
+                    " values (?, ?, ?, ?, ?, ?, CURRENT_DATE, 0)";
 
             this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
             this.preparedStatement.setString(1, user.getNome());

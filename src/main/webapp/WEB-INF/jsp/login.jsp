@@ -11,6 +11,8 @@
 
 
 <!doctype html>
+<c:choose>
+    <c:when test="${usuario_logado == null}">
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -87,4 +89,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
-
+    </c:when>
+    <c:otherwise>
+        <c:redirect url="home"></c:redirect>
+    </c:otherwise>
+</c:choose>
