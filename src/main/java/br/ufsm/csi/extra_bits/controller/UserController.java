@@ -1,6 +1,8 @@
 package br.ufsm.csi.extra_bits.controller;
 
+import br.ufsm.csi.extra_bits.dao.ProdutoDAO;
 import br.ufsm.csi.extra_bits.dao.UsuarioDAO;
+import br.ufsm.csi.extra_bits.model.CarrinhoCompra;
 import br.ufsm.csi.extra_bits.model.Produto;
 import br.ufsm.csi.extra_bits.model.Usuario;
 import org.springframework.stereotype.Controller;
@@ -13,11 +15,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 public class UserController {
     UsuarioDAO dao = new UsuarioDAO();
-
 
     @PostMapping("/cadastro")
     public RedirectView cadastro(@ModelAttribute("usuario") Usuario usuario){
@@ -34,6 +36,47 @@ public class UserController {
 
         model.addAttribute("usuario", usuario_logado);
         return "editarperfil";
+    }
+
+    @GetMapping("/comprasuser")
+    public String comprasUser(Model model, HttpSession session){
+        Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
+
+        ProdutoDAO pdao = new ProdutoDAO();
+
+        int id = usuario_logado.getId_usuario();
+        List<CarrinhoCompra> hist = pdao.getHistorico(id);
+
+        model.addAttribute("compras", hist);
+        model.addAttribute("historico", pdao.getProdutosHist(hist));
+        return "/compras";
+
+    }
+
+    @GetMapping("/compras")
+    public RedirectView compras(){
+        return new RedirectView("/comprasuser", true);
+    }
+
+    @GetMapping("/vendastotal")
+    public String vendas(Model model, HttpSession session){
+        Usuario usuario_logado = (Usuario) session.getAttribute("usuario_logado");
+
+        ProdutoDAO pdao = new ProdutoDAO();
+
+        List<CarrinhoCompra> hist = pdao.getHistoricoTotal();
+        List<Usuario> user = dao.getperfilsUser();
+
+
+        model.addAttribute("histTotal", hist);
+        model.addAttribute("UserBuy", user);
+        model.addAttribute("produtosTotal", pdao.getProdutosHistTotal());
+        return "/vendas";
+    }
+
+    @GetMapping("/vendas")
+    public RedirectView vendasTotal(){
+        return new RedirectView("/vendastotal", true);
     }
 
     @PostMapping("/editarperf")

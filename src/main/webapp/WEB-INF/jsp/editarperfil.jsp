@@ -105,7 +105,7 @@
                     </li>
                 </ul>
                 <div class="text-end">
-                    <a href="carrinho">Carrinho</a>
+                    <a href="vendas">Vendas</a>
                     <a href="sair">Sair</a>
                 </div>
                 <!-- Collapsible wrapper -->
@@ -132,11 +132,13 @@
                         </a>
                         <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
                             <li><a class="dropdown-item text-white" href="/extrabits/home">Página Inicial</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-white" href="/extrabits/compras">Compras</a></li>
                         </ul>
                     </li>
                 </ul>
                 <div class="text-end">
-                    <a href="carrinho">Carrinho</a>
+                    <a href="/extrabits/carrinho">Carrinho</a>
                     <a href="sair">Sair</a>
                 </div>
                 <!-- Collapsible wrapper -->

@@ -54,7 +54,6 @@ public class IndexController {
         return new RedirectView(url, true);
     }
 
-
     @GetMapping("/cadastro")
     public String cadastro(){
         return "cadastro";

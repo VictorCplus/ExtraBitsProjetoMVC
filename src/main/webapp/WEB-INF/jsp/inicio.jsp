@@ -47,24 +47,18 @@
                     </form>
                 </div>
             </div>
-
-                <%--    Navbar       --%>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <!-- Container wrapper -->
-                <div class="container-fluid">
-                    <!-- Collapsible wrapper -->
-
-                    <div class="text-end collapse navbar-collapse justify-content-end">
-                        <a href="login"><button type="button" class="btn btn-outline-primary" >Login</button></a>
-                        <a href="cadastro"><button type="button" class="btn btn-primary" >Cadastrar</button></a>
-                    </div>
-                    <!-- Collapsible wrapper -->
-                </div>
-                <!-- Container wrapper -->
-            </nav>
         </header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="text-end collapse navbar-collapse justify-content-end">
+                    <a href="login"><button type="button" class="btn btn-outline-primary">Login</button></a>
+                    <a href="cadastro"><button type="button" class="btn btn-primary">Cadastrar</button></a>
+                </div>
+            </div>
+        </nav>
     </c:when>
 </c:choose>
+
 <c:choose>
     <c:when test="${usuario_logado != null}">
         <header class="p-3 bg-dark text-white">
@@ -80,34 +74,26 @@
                             <img src="https://icon-library.com/images/white-gear-icon-png/white-gear-icon-png-16.jpg"
                                  alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
                     </ul>
-                        <%-- Movida para dentro da div --%>
                         <%-- Verificar se o usuário está logado e exibir a mensagem --%>
                     <c:if test="${usuario_logado != null}">
                         <div class="text-end">
                             <h1>Olá ${usuario_logado.nome}</h1>
                         </div>
                     </c:if>
-                        <%-- ... --%>
                 </div>
                 <div class="form-group order-lg-first">
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                         <input type="search" class="form-control form-control-dark text-white bg-dark"
-                               placeholder="Pesquise aqui..." aria-label="Search">
+                               placeholder="Pesquise por uma categoria ou produto..." aria-label="Search">
                     </form>
                 </div>
             </div>
             <c:if test="${usuario_logado.permissao == 1}">
-                <%--                Navbar do adm              --%>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <!-- Container wrapper -->
                     <div class="container-fluid">
-                        <div
-                                class="collapse navbar-collapse justify-content-center"
-                                id="navbarCenteredExample"
-                        ><!-- Left links -->
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
                         </div>
                         <ul class="navbar-nav mb-2 mb-lg-0">
-                            <!-- Navbar dropdown -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
@@ -121,26 +107,18 @@
                             </li>
                         </ul>
                         <div class="text-end">
-                            <a href="carrinho">Carrinho</a>
+                            <a href="vendas">Vendas</a>
                             <a href="sair">Sair</a>
                         </div>
-                        <!-- Collapsible wrapper -->
                     </div>
-                    <!-- Container wrapper -->
                 </nav>
             </c:if>
-                <%--                Navbar do usuario/cliente              --%>
             <c:if test="${usuario_logado.permissao == 0}">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <!-- Container wrapper -->
                     <div class="container-fluid">
-                        <div
-                                class="collapse navbar-collapse justify-content-center"
-                                id="navbarCenteredExample"
-                        ><!-- Left links -->
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
                         </div>
                         <ul class="navbar-nav mb-2 mb-lg-0">
-                            <!-- Navbar dropdown -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
@@ -148,16 +126,16 @@
                                 </a>
                                 <ul class="dropdown-menu bg-dark" aria-labelledby="navbarScrollingDropdown">
                                     <li><a class="dropdown-item text-white" href="/extrabits/perfil">Editar Perfil</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-white" href="/extrabits/compras">Compras</a></li>
                                 </ul>
                             </li>
                         </ul>
                         <div class="text-end">
-                            <a href="carrinho">Carrinho</a>
+                            <a href="/extrabits/carrinho">Carrinho</a>
                             <a href="sair">Sair</a>
                         </div>
-                        <!-- Collapsible wrapper -->
                     </div>
-                    <!-- Container wrapper -->
                 </nav>
             </c:if>
         </header>
@@ -165,113 +143,34 @@
 </c:choose>
 
 <main>
-    <%--    Imagens dos slides nessa area--%>
-        <section class="py-5 text-center container">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <c:forEach items="${produtos}" var="produto" varStatus="status">
-                        <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-                            <img class="img-slide d-block w-100" src="${produto.imagem}" alt="">
-                        </div>
-                    </c:forEach>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </section>
-    <%--    Parte produto usuario deslogado --%>
-        <c:choose>
-            <c:when test="${usuario_logado == null}">
-    <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <c:forEach items="${produtos}" var="produto">
-                    <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
-                        <input type="hidden" name="id_produto" value="${produto.id_produto}" />
-                    <div class="col">
-                        <div class="card shadow-sm zoom">
-                            <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
-                                <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                    <title>${produto.nome}</title>
-                                    <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%"/>
-                                    <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
-                                </svg>
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">Categoria: ${produto.categoria}</h5>
-                                <p class="card-text description">${produto.descricao}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-primary" type="submit" >Visualizar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <section class="py-5 text-center container">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <c:forEach items="${produtos}" var="produto" varStatus="status">
+                    <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                        <img class="img-slide d-block w-100" src="${produto.imagem}" alt="">
                     </div>
-                    </form>
                 </c:forEach>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    </div>
-            </c:when>
-        </c:choose>
-        <%--        Parte produtos do adm     --%>
-        <c:choose>
-            <c:when test="${usuario_logado != null && usuario_logado.permissao == 1}">
-                <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <c:forEach items="${produtos}" var="produto">
-                                <form action="/extrabits/editarProduto" method="post" id="submitForm_${produto.id_produto}">
-                                    <input type="hidden" name="id_produto" value="${produto.id_produto}" />
-                                    <div class="col">
-                                        <div class="card shadow-sm zoom">
-                                            <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
-                                                <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                                    <title>${produto.nome}</title>
-                                                    <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%" />
-                                                    <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
-                                                </svg>
-                                            </a>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Categoria: ${produto.categoria}</h5>
-                                                <p class="card-text description">${produto.descricao}</p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
-                                                    </div>
-                                                    <div>
-                                                        <button class="btn btn-primary" type="submit">Editar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:when>
-        </c:choose>
-        <%--        Parte produtos do usuario/cliente     --%>
-        <c:choose>
-            <c:when test="${usuario_logado != null && usuario_logado.permissao == 0}">
-                <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <c:forEach items="${produtos}" var="produto">
-                                <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
-                                    <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+    </section>
+
+    <c:choose>
+        <c:when test="${usuario_logado == null}">
+            <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <c:forEach items="${produtos}" var="produto">
+                            <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
+                                <input type="hidden" name="id_produto" value="${produto.id_produto}" />
                                 <div class="col">
                                     <div class="card shadow-sm zoom">
                                         <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
@@ -289,21 +188,103 @@
                                                     <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
                                                 </div>
                                                 <div>
-                                                    <button class="btn btn-primary" onclick="exibirMensagem()">Comprar</button>
-                                                    <button class="btn btn-success" onclick="exibirMensagem()">Adicionar ao Carrinho</button>
+                                                    <button class="btn btn-primary" type="submit" >Visualizar</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </form>
-                            </c:forEach>
-                        </div>
+                            </form>
+                        </c:forEach>
                     </div>
                 </div>
-            </c:when>
-        </c:choose>
+            </div>
+        </c:when>
+    </c:choose>
+
+    <c:choose>
+        <c:when test="${usuario_logado != null && usuario_logado.permissao == 1}">
+            <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <c:forEach items="${produtos}" var="produto">
+                            <form action="/extrabits/editarProduto" method="post" id="submitForm_${produto.id_produto}">
+                                <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                                <div class="col">
+                                    <div class="card shadow-sm zoom">
+                                        <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
+                                            <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                                <title>${produto.nome}</title>
+                                                <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%" />
+                                                <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
+                                            </svg>
+                                        </a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Categoria: ${produto.categoria}</h5>
+                                            <p class="card-text description">${produto.descricao}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-primary" type="submit">Editar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </c:when>
+    </c:choose>
+
+    <c:choose>
+        <c:when test="${usuario_logado != null && usuario_logado.permissao == 0}">
+            <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <c:forEach items="${produtos}" var="produto">
+                            <div class="col">
+                                <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
+                                    <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                                    <div class="card shadow-sm zoom">
+                                        <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
+                                            <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                                <title>${produto.nome}</title>
+                                                <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%"/>
+                                                <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
+                                            </svg>
+                                        </a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Categoria: ${produto.categoria}</h5>
+                                            <p class="card-text description">${produto.descricao}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
+                                                </div>
+                                </form>
+                                                <div class="d-flex justify-content-start">
+                                                    <!-- Botão "Adicionar ao Carrinho" -->
+                                                    <form action="/extrabits/adicionarAoCarrinho" method="post" class="p-1">
+                                                        <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                                                        <button type="submit" class="btn btn-success ml-2" onclick="exibirMensagem()">Adicionar ao Carrinho</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </c:when>
+    </c:choose>
 </main>
+
 <footer class="text-muted py-5 bg-dark">
     <div class="container">
         <p class="float-end mb-1">
@@ -326,8 +307,7 @@
     });
 
     function exibirMensagem() {
-        alert("Por favor, faça login antes de comprar ou adicionar ao carrinho.");
-        window.location.href = "login"; // Substitua "pagina_de_login.html" pelo URL da sua página de login
+        alert("Produto adicionado ao carrinho com sucesso !!!");
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

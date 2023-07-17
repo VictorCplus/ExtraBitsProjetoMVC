@@ -152,7 +152,6 @@
                             </li>
                         </ul>
                         <div class="text-end">
-                            <a href="carrinho">Carrinho</a>
                             <a href="sair">Sair</a>
                         </div>
                         <!-- Collapsible wrapper -->
@@ -183,7 +182,7 @@
                             </li>
                         </ul>
                         <div class="text-end">
-                            <a href="carrinho">Carrinho</a>
+                            <a href="/extrabits/carrinho">Carrinho</a>
                             <a href="sair">Sair</a>
                         </div>
                         <!-- Collapsible wrapper -->
@@ -206,43 +205,74 @@
                     <input class="d-flex flex-column align-items-center text-center" type="date" value="${produto.data_adicionado}" style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px" disabled></h2>
             </div>
         </div>
-        <div class="col-md-5 border-right">
+        <div class="col-md-9">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">${produto.nome}</h4>
                 </div>
-                    <input type="hidden" name="id_produto" value="${produto.id_produto}">
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Categoria do produto</label>
-                            <span class="form-control" style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">${produto.categoria}</span>
-                        </div>
+                <input type="hidden" name="id_produto" value="${produto.id_produto}">
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Categoria do produto</label>
+                        <span class="form-control" style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">${produto.categoria}</span>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Descrição</label>
-                            <textarea id="input-produto-descricao"  rows="3" name="descricao" class="form-control" disabled style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">${produto.descricao}</textarea>
-                        </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Descrição</label>
+                        <textarea id="input-produto-descricao" rows="3" name="descricao" class="form-control" disabled style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">${produto.descricao}</textarea>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Preço</label>
-                            <input type="text" name="valor" value="${produto.valor}" class="form-control" placeholder="R$" disabled style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">
-                        </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Preço</label>
+                        <input type="text" name="valor" value="${produto.valor}" class="form-control" placeholder="R$" disabled style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 20px">
                     </div>
-                    <div class="mt-3 p-2 py-2 text-center">
-                        <button class="btn btn-primary w-10 btn btn-lg " onclick="exibirMensagem()">Comprar</button>
-                        <button class="btn btn-success w-10 btn btn-lg " onclick="exibirMensagem()">Adicionar ao Carrinho</button>
-                        <a href="home" type="button" class="w-10 btn btn-lg btn-secondary">Voltar</a>
-                    </div>
+                </div>
+                <div class="mt-3 p-2 py-2 text-center">
+                    <c:choose>
+                        <c:when test="${usuario_logado == null}">
+                            <button class="btn btn-success btn-lg" onclick="exibirMensagem()">Adicionar ao Carrinho</button>
+                            <a href="home" type="button" class="btn btn-secondary btn-lg">Voltar</a>
+                        </c:when>
+                        <c:otherwise>
+                            <form id="meuFormulario" action="/extrabits/adicionarAoCarrinho" method="post" class="d-inline">
+                                <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                                <button class="btn btn-success btn-lg" data-form-id="meuFormulario">Adicionar ao Carrinho</button>
+                            </form>
+                            <a href="home" type="button" class="btn btn-secondary btn-lg">Voltar</a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Captura o clique do botão
+        $("#adicionarAoCarrinhoBtn").on("click", function() {
+            // Faz a requisição AJAX para o backend
+            $.ajax({
+                type: "POST",
+                url: "/adicionarAoCarrinho?id_produto=SEU_ID_AQUI",
+                success: function(response) {
+                    // Redireciona o usuário de volta para a página informada pelo backend
+                    window.location.href = response;
+                },
+                error: function(xhr, status, error) {
+                    // Lida com possíveis erros
+                    console.error("Erro ao adicionar ao carrinho:", status, error);
+                }
+            });
+        });
+    });
+</script>
 <script>
     function exibirMensagem() {
-    alert("Por favor, faça login antes de comprar ou adicionar ao carrinho.");
-    window.location.href = "/extrabits/login"; // Substitua "pagina_de_login.html" pelo URL da sua página de login
+    alert("Por favor, faça login antes de adicionar ao carrinho.");
+    window.location.href = "/extrabits/login";
 }
     function adjustTextareaHeight(element) {
         element.style.height = 'auto';
@@ -257,6 +287,13 @@
             adjustTextareaHeight(this);
         });
     });
+    function exibirMensagemdeadd(event) {
+        event.preventDefault(); // Impede o envio do formulário
+        const formId = event.target.getAttribute("meuFormulario");
+        const form = document.getElementById(formId);
+        alert("Produto adicionado ao carrinho com sucesso !!!");
+        form.submit();
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/autosize@4.0.2/dist/autosize.min.js"></script>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

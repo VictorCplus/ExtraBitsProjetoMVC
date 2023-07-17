@@ -100,7 +100,7 @@
                 </li>
             </ul>
             <div class="text-end">
-                <a href="carrinho">Carrinho</a>
+                <a href="vendas">Vendas</a>
                 <a href="sair">Sair</a>
             </div>
         </div>

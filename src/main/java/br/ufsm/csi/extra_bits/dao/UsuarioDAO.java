@@ -3,6 +3,8 @@ package br.ufsm.csi.extra_bits.dao;
 import br.ufsm.csi.extra_bits.model.Usuario;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO {
 
@@ -106,6 +108,34 @@ public class UsuarioDAO {
                 usuario.setTelefone(resultSet.getString("telefone"));
                 usuario.setData_nascimento(resultSet.getDate("data_nascimento"));
                 usuario.setData_cadastro(resultSet.getDate("data_cadastro"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    public List<Usuario> getperfilsUser(){
+        List<Usuario> usuario = new ArrayList<>();
+
+        try(Connection connection = new ConexaoBD().getConexao()){
+
+            this.sql = "select * from usuario";
+            preparedStatement = connection.prepareStatement(this.sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Usuario user = new Usuario();
+                user.setId_usuario(resultSet.getInt("id_usuario"));
+                user.setNome(resultSet.getString("nome"));
+                user.setEmail(resultSet.getString("email"));
+                user.setCpf(resultSet.getString("cpf"));
+                user.setSenha(resultSet.getString("senha"));
+                user.setTelefone(resultSet.getString("telefone"));
+                user.setData_nascimento(resultSet.getDate("data_nascimento"));
+                user.setData_cadastro(resultSet.getDate("data_cadastro"));
+                usuario.add(user);
             }
 
         }catch (SQLException e){
