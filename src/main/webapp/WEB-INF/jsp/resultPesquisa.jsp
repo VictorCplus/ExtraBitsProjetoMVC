@@ -22,12 +22,6 @@
         h1 { color: #b48608; font-family: 'Droid serif', serif; font-size: 36px; font-weight: 400;
             font-style: italic; line-height: 44px; margin: 0 0 12px; text-align: center; }
         a {color: #ffffff;}
-        .footer-fixed {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
@@ -94,7 +88,6 @@
                     </form>
                 </div>
             </div>
-                <%--                Navbar do adm              --%>
             <c:if test="${usuario_logado.permissao == 1}">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
@@ -120,7 +113,6 @@
                     </div>
                 </nav>
             </c:if>
-                <%--                Navbar do usuario/cliente              --%>
             <c:if test="${usuario_logado.permissao == 0}">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
@@ -151,32 +143,13 @@
 </c:choose>
 
 <main>
-    <section class="py-5 text-center container">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <c:forEach items="${produtos}" var="produto" varStatus="status">
-                    <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-                        <img class="img-slide d-block w-100" src="${produto.imagem}" alt="">
-                    </div>
-                </c:forEach>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>
 
     <c:choose>
         <c:when test="${usuario_logado == null}">
             <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <c:forEach items="${produtos}" var="produto">
+                        <c:forEach items="${pesquisa}" var="produto">
                             <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
                                 <input type="hidden" name="id_produto" value="${produto.id_produto}" />
                                 <div class="col">
@@ -215,7 +188,7 @@
             <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <c:forEach items="${produtos}" var="produto">
+                        <c:forEach items="${pesquisa}" var="produto">
                             <form action="/extrabits/editarProduto" method="post" id="submitForm_${produto.id_produto}">
                                 <input type="hidden" name="id_produto" value="${produto.id_produto}" />
                                 <div class="col">
@@ -252,56 +225,46 @@
     <c:choose>
         <c:when test="${usuario_logado != null && usuario_logado.permissao == 0}">
             <div class="album py-5 bg-dark" style="--bs-bg-opacity: .9">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <c:forEach items="${produtos}" var="produto">
-                            <div class="col">
-                                <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
-                                    <input type="hidden" name="id_produto" value="${produto.id_produto}" />
-                                    <div class="card shadow-sm zoom">
-                                        <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
-                                            <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                                <title>${produto.nome}</title>
-                                                <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%"/>
-                                                <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
-                                            </svg>
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Categoria: ${produto.categoria}</h5>
-                                            <p class="card-text description">${produto.descricao}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
-                                                </div>
-                                </form>
-                                                <div class="d-flex justify-content-start">
-                                                    <!-- Botão "Adicionar ao Carrinho" -->
-                                                    <form action="/extrabits/adicionarAoCarrinho" method="post" class="p-1">
-                                                        <input type="hidden" name="id_produto" value="${produto.id_produto}" />
-                                                        <button type="submit" class="btn btn-success ml-2" onclick="exibirMensagem()">Adicionar ao Carrinho</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <c:forEach items="${pesquisa}" var="produto">
+                <div class="col">
+                    <form action="/extrabits/verProduto" method="post" id="submitForm_${produto.id_produto}">
+                        <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                        <div class="card shadow-sm zoom">
+                            <a href="#" onclick="document.getElementById('submitForm_${produto.id_produto}').submit();">
+                                <svg class="bd-placeholder-img card-img-top" text-decoration="teste" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>${produto.nome}</title>
+                                    <image class="img-responsive" href="${produto.imagem}" height="100%" width="100%"/>
+                                    <text class="text-item fw-semibold" x="50%" y="92%" fill="#ff6200">${produto.nome}</text>
+                                </svg>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">Categoria: ${produto.categoria}</h5>
+                                <p class="card-text description">${produto.descricao}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="fw-bold" style="color: #ff6200;">R$ ${produto.valor}</p>
                                     </div>
-                            </div>
-                        </c:forEach>
+                    </form>
+                    <div class="d-flex justify-content-start">
+
+                        <form action="/extrabits/adicionarAoCarrinho" method="post" class="p-1">
+                            <input type="hidden" name="id_produto" value="${produto.id_produto}" />
+                            <button type="submit" class="btn btn-success ml-2" onclick="exibirMensagem()">Adicionar ao Carrinho</button>
+                        </form>
                     </div>
                 </div>
+                </div>
+                </div>
+                </div>
+            </c:forEach>
+            </div>
+            </div>
             </div>
         </c:when>
     </c:choose>
 </main>
-
-<footer class="text-muted py-5 bg-dark">
-    <div class="container">
-        <p class="float-end mb-1">
-            <a href="#"><img src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-61-700x700.png" align="right" width="10%" height="10%"></a>
-        </p>
-        <p class="mb-1 text-light">Garantimos sua compra com 100% de segurança.</p>
-        <p class="mb-0 text-light">Precisa de ajuda ?<a href="/"> Clique aqui </a> ,ou converse um de nossos atendentes <a href="../getting-started/introduction/">no nosso chat</a>.</p>
-    </div>
-</footer>
 <script>
     const descriptions = document.querySelectorAll('.card-text.description');
     const maxDescriptionLength = 140;
@@ -318,6 +281,15 @@
         alert("Produto adicionado ao carrinho com sucesso !!!");
     }
 </script>
+<footer class="text-muted py-5 bg-dark">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#"><img src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-61-700x700.png" align="right" width="10%" height="10%"></a>
+        </p>
+        <p class="mb-1 text-light">Garantimos sua compra com 100% de segurança.</p>
+        <p class="mb-0 text-light">Precisa de ajuda ?<a href="https://github.com/VictorCplus"> Clique aqui </a> ,ou converse um de nossos atendentes <a href="https://github.com/VictorCplus">no nosso chat</a>.</p>
+    </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

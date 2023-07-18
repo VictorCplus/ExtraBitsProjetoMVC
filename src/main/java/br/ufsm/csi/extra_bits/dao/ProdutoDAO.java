@@ -2,6 +2,7 @@ package br.ufsm.csi.extra_bits.dao;
 
 import br.ufsm.csi.extra_bits.model.CarrinhoCompra;
 import br.ufsm.csi.extra_bits.model.Produto;
+import org.springframework.util.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ProdutoDAO {
             preparedStatement.setString(3, produto.getCategoria());
             preparedStatement.setString(4, produto.getDescricao());
             preparedStatement.setFloat(5, produto.getValor());
-            System.out.println(preparedStatement);
+
 
             this.preparedStatement.execute();
             this.resultSet = this.preparedStatement.getGeneratedKeys();
@@ -329,6 +330,47 @@ public class ProdutoDAO {
         }
 
         return "";
+    }
+
+    public ArrayList<Produto> getPesquisa(String pesquisa) {
+        ArrayList<Produto> produtos = new ArrayList<>();
+
+        try (Connection connection = new ConexaoBD().getConexao()) {
+            String sql;
+            ResultSet resultSet;
+            PreparedStatement preparedStatement;
+
+            pesquisa = pesquisa.trim();
+
+            if (StringUtils.endsWithIgnoreCase(pesquisa, "s")) {
+                pesquisa = pesquisa.substring(0, pesquisa.length() - 1);
+            }
+
+            String pesquisaLowerCase = pesquisa.toLowerCase();
+
+            sql = "SELECT * FROM produto WHERE LOWER(produto.categoria) LIKE ? OR LOWER(produto.nome) LIKE ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + pesquisaLowerCase + "%");
+            preparedStatement.setString(2, "%" + pesquisaLowerCase + "%");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Produto produto = new Produto();
+                produto.setId_produto(resultSet.getInt("id_produto"));
+                produto.setNome(resultSet.getString("nome"));
+                produto.setDescricao(resultSet.getString("descricao"));
+                produto.setValor(resultSet.getFloat("valor"));
+                produto.setCategoria(resultSet.getString("categoria"));
+                produto.setImagem(resultSet.getString("imagem"));
+                produto.setData_adicionado(resultSet.getDate("data_adicionado"));
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produtos;
     }
 
 

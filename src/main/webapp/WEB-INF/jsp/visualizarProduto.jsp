@@ -251,18 +251,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Captura o clique do botão
+
         $("#adicionarAoCarrinhoBtn").on("click", function() {
-            // Faz a requisição AJAX para o backend
+
             $.ajax({
                 type: "POST",
                 url: "/adicionarAoCarrinho?id_produto=SEU_ID_AQUI",
                 success: function(response) {
-                    // Redireciona o usuário de volta para a página informada pelo backend
+
                     window.location.href = response;
                 },
                 error: function(xhr, status, error) {
-                    // Lida com possíveis erros
+
                     console.error("Erro ao adicionar ao carrinho:", status, error);
                 }
             });
@@ -288,7 +288,7 @@
         });
     });
     function exibirMensagemdeadd(event) {
-        event.preventDefault(); // Impede o envio do formulário
+        event.preventDefault();
         const formId = event.target.getAttribute("meuFormulario");
         const form = document.getElementById(formId);
         alert("Produto adicionado ao carrinho com sucesso !!!");

@@ -130,6 +130,7 @@
                         <option value="Water Coolers">Water Cooler</option>
                         <option value="Placas Maes">Placa Mãe</option>
                         <option value="SSD/HD">SSD/HD</option>
+                        <option value="Outros">Outros</option>
                     </select>
                 </div>
                 <div class="form-group mb-4">

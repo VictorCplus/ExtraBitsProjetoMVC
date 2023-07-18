@@ -82,7 +82,7 @@
                    alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
           </ul>
         </div>
-        <%--                Navbar do usuario/cliente              --%>
+
       <c:if test="${usuario_logado.permissao == 0}">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <!-- Container wrapper -->
@@ -133,38 +133,37 @@
       <ul class="list-group">
         <c:if test="${not empty produtosNoCarrinho}">
         <c:forEach items="${produtosNoCarrinho}" var="produto">
-        <li class="list-group-item">
-          <div class="d-flex align-items-center">
-            <div class="text-center" style="flex: 1;">
-              <img src="${produto.imagem}" alt="${produto.nome}" width="50" height="50">
+          <li class="list-group-item cart-product">
+            <div class="d-flex align-items-center">
+              <div class="text-center" style="flex: 1;">
+                <img src="${produto.imagem}" alt="${produto.nome}" width="50" height="50">
+              </div>
+              <div class="text-center" style="flex: 1;">${produto.nome}</div>
+              <div class="text-center cart-product-price" style="flex: 1;">R$ ${produto.valor}</div>
+              <button type="button" class="btn btn-danger btn-sm btn-de-remover" data-id-produto="${produto.id_produto}">Remover</button>
             </div>
-            <div class="text-center" style="flex: 1;">${produto.nome}</div>
-            <div class="text-center" style="flex: 1;">R$ ${produto.valor}</div>
-            <button type="button" class="btn btn-danger btn-sm btn-de-remover" data-id-produto="${produto.id_produto}">Remover</button>
-          </div>
-        </li>
+          </li>
         </c:forEach>
-        <div class="mt-3 d-flex justify-content-center p-2">
-          <button type="submit" class="btn btn-primary mr-2">Comprar</button>
-          <a href="/extrabits/home" type="button" class="btn btn-secondary">Voltar</a>
-        </div>
-        </c:if>
-        <c:if test="${empty produtosNoCarrinho}">
+      </ul>
+      <div class="mt-3 d-flex justify-content-center p-2">
+        <button type="submit" class="btn btn-primary mr-2">Comprar</button>
+        <a href="/extrabits/home" type="button" class="btn btn-secondary">Voltar</a>
+      </div>
+      </c:if>
+      <c:if test="${empty produtosNoCarrinho}">
         <div class="mt-3 d-flex justify-content-center p-2">
           <a href="/extrabits/home" type="button" class="btn btn-secondary p-2">Voltar</a>
         </div>
-        </c:if>
+      </c:if>
     </form>
-    <div class="d-flex justify-content-end p-4">
-      <td colspan="3">
-        <strong>Total: </strong>
-        <span>R$ </span>
-      </td>
+    <div id="totalPrice" class="mt-3 d-flex justify-content-end p-4">
+      <span></span>
     </div>
   </div>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+  // Função de remover do carrinho
   $(document).ready(function() {
     $(".btn-de-remover").click(function(event) {
       event.preventDefault(); // Evita o comportamento padrão do botão de enviar
@@ -183,11 +182,33 @@
         error: function() {
           alert("Ocorreu um erro ao remover o produto do carrinho.");
         }
+
       });
     });
+    calcularTotalCarrinho();
   });
+  // Função para calcular o total do carrinho
+  function calcularTotalCarrinho() {
+
+    const precoElements = document.querySelectorAll(".cart-product-price");
+
+    let totalCarrinho = 0;
+
+
+    precoElements.forEach((element) => {
+
+      const precoText = element.innerText;
+      const preco = parseFloat(precoText.replace("R$ ", "").replace(",", "."));
+      totalCarrinho += preco;
+    });
+
+    const totalFormatted = totalCarrinho.toFixed(2);
+
+
+    document.getElementById("totalPrice").innerText = `Total: R$ `+totalFormatted;
+  }
+
 </script>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

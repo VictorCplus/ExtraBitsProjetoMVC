@@ -80,7 +80,6 @@
                    alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
           </ul>
         </div>
-        <%--                Navbar do usuario/cliente              --%>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <!-- Container wrapper -->
           <div class="container-fluid">

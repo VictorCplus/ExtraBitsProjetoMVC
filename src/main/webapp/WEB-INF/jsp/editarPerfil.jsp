@@ -80,7 +80,7 @@
             </ul>
         </div>
     </div>
-    <%--                Navbar do adm              --%>
+
     <c:if test="${usuario_logado.permissao == 1}">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <!-- Container wrapper -->

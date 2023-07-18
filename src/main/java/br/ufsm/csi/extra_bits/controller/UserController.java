@@ -3,7 +3,6 @@ package br.ufsm.csi.extra_bits.controller;
 import br.ufsm.csi.extra_bits.dao.ProdutoDAO;
 import br.ufsm.csi.extra_bits.dao.UsuarioDAO;
 import br.ufsm.csi.extra_bits.model.CarrinhoCompra;
-import br.ufsm.csi.extra_bits.model.Produto;
 import br.ufsm.csi.extra_bits.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,7 @@ public class UserController {
         dao.getperfiluser(usuario_logado.getId_usuario());
 
         model.addAttribute("usuario", usuario_logado);
-        return "editarperfil";
+        return "editarPerfil";
     }
 
     @GetMapping("/comprasuser")

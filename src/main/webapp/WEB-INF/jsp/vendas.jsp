@@ -80,14 +80,8 @@
                                  alt="" width="50" height="50" class="d-inline-block align-text-center"> Extra Bits</a></li>
                     </ul>
                 </div>
-                <div class="form-group order-lg-first">
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                        <input type="search" class="form-control form-control-dark text-white bg-dark"
-                               placeholder="Pesquise aqui..." aria-label="Search">
-                    </form>
-                </div>
             </div>
-                <%--                Navbar do usuario/cliente              --%>
+
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <!-- Container wrapper -->
                 <div class="container-fluid">
@@ -107,10 +101,13 @@
                                 <li><a class="dropdown-item text-white" href="/extrabits/home">Página Inicial</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-white" href="/extrabits/perfil">Editar Perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-white" href="/extrabits/produto">Cadastrar Produto</a></li>
                             </ul>
                         </li>
                     </ul>
                     <div class="text-end">
+                        <a href="vendas">Vendas</a>
                         <a href="sair">Sair</a>
                     </div>
                     <!-- Collapsible wrapper -->
@@ -143,11 +140,16 @@
                                         <div class="col text-center" style="flex: 1">
                                             <input type="date" value="${hist.data_compra}" style="border: none; background: transparent; font-weight: normal; font-family: sans-serif; font-size: 15px;" disabled>
                                         </div>
+                                        <c:set var="userFound" value="false" />
                                         <c:forEach items="${UserBuy}" var="user">
                                             <c:if test="${hist.id_usuario eq user.id_usuario}">
                                                 <div class="col text-center" style="flex: 1;">${user.nome}</div>
+                                                <c:set var="userFound" value="true" />
                                             </c:if>
                                         </c:forEach>
+                                        <c:if test="${not userFound}">
+                                            <div class="col text-center" style="flex: 1;">Conta Excluída</div>
+                                        </c:if>
                                     </c:if>
                                 </c:forEach>
                             </div>
